@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import Card from "./Card";
-import { AppContext } from "./context/AppContext";
+import { AppContext } from "../context/AppContext";
 import Loader from "./Loader";
 
 const PolygonCard = ({}) => {

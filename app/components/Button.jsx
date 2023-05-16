@@ -1,7 +1,7 @@
 import Link from "next/link";
 import React, { useContext } from "react";
 import { BsShieldCheck } from "react-icons/bs";
-import { AppContext } from "./context/AppContext";
+import { AppContext } from "../context/AppContext";
 
 const Button = ({ title, property, Icon }) => {
   const { tabs, setTabs } = useContext(AppContext);
@@ -14,7 +14,7 @@ const Button = ({ title, property, Icon }) => {
         tabs[property] ? "bg-[#065F46]" : "bg-transparent"
       }`}
     >
-      <Icon />
+      {Icon && <Icon />}
       <Link href="#">{title}</Link>
     </button>
   );

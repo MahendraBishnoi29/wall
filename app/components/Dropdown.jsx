@@ -3,7 +3,7 @@ import { useContext, useState } from "react";
 import { FaChevronDown, FaChevronUp, FaDiceD6 } from "react-icons/fa";
 import { BsShieldCheck } from "react-icons/bs";
 import { AiOutlineGift } from "react-icons/ai";
-import { AppContext } from "./context/AppContext";
+import { AppContext } from "../context/AppContext";
 import Button from "./Button";
 
 const Dropdown = () => {
