@@ -1,29 +1,56 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { BiDollar } from "react-icons/bi";
 import { FaTwitter } from "react-icons/fa";
 import { FiLink2 } from "react-icons/fi";
 import Dropdown from "./Dropdown";
+import { AppContext } from "./context/AppContext";
 
 const TabButton = ({ active }) => {
+  const { tabs, setTabs } = useContext(AppContext);
+
   return (
     <>
-      <button className="flex items-center justify-center gap-2 font-medium text-xl p-[8px 16px] outline-none text-white bg-black hover:bg-[#065F46] px-4 py-2 rounded-lg transition-all duration-300 border border-[#059669]">
+      <button
+        onClick={() => setTabs((tabs) => ({ ...tabs, all: !tabs["all"] }))}
+        className={`flex items-center justify-center gap-2 font-medium text-xl p-[8px 16px] outline-none text-white hover:bg-[#065F46] px-4 py-2 rounded-lg transition-all duration-300 border border-[#059669] ${
+          tabs.all ? "bg-[#065F46]" : "bg-transparent"
+        }`}
+      >
         <span>All</span>
       </button>
 
-      <button className="flex items-center justify-center gap-2 font-medium text-xl p-[8px 16px] outline-none text-white bg-black hover:bg-[#065F46] px-4 py-2 rounded-lg transition-all duration-300 border border-[#059669]">
+      <button
+        onClick={() =>
+          setTabs((tabs) => ({ ...tabs, social: !tabs["social"] }))
+        }
+        className={`flex items-center justify-center gap-2 font-medium text-xl p-[8px 16px] outline-none text-white hover:bg-[#065F46] px-4 py-2 rounded-lg transition-all duration-300 border border-[#059669] ${
+          tabs.social ? "bg-[#065F46]" : "bg-transparent"
+        }`}
+      >
         <FiLink2 className="w-6 h-6" />
-        <span>On Chain</span>
-      </button>
-
-      <button className="flex items-center justify-center gap-2 font-medium text-xl p-[8px 16px] outline-none text-white bg-black hover:bg-[#065F46] px-4 py-2 rounded-lg transition-all duration-300 border border-[#059669]">
-        <FaTwitter className="w-6 h-6" />
         <span>Social</span>
       </button>
 
-      <button className="flex items-center justify-center gap-2 font-medium text-xl p-[8px 16px] outline-none text-white bg-black hover:bg-[#065F46] px-4 py-2 rounded-lg transition-all duration-300 border border-[#059669]">
-        <BiDollar className="w-6 h-6" />
+      <button
+        onClick={() => setTabs((tabs) => ({ ...tabs, token: !tabs["token"] }))}
+        className={`flex items-center justify-center gap-2 font-medium text-xl p-[8px 16px] outline-none text-white hover:bg-[#065F46] px-4 py-2 rounded-lg transition-all duration-300 border border-[#059669] ${
+          tabs.token ? "bg-[#065F46]" : "bg-transparent"
+        }`}
+      >
+        <FaTwitter className="w-6 h-6" />
         <span>Token</span>
+      </button>
+
+      <button
+        onClick={() =>
+          setTabs((tabs) => ({ ...tabs, on_chain: !tabs["on_chain"] }))
+        }
+        className={`flex items-center justify-center gap-2 font-medium text-xl p-[8px 16px] outline-none text-white hover:bg-[#065F46] px-4 py-2 rounded-lg transition-all duration-300 border border-[#059669] ${
+          tabs["on_chain"] ? "bg-[#065F46]" : "bg-transparent"
+        }`}
+      >
+        <BiDollar className="w-6 h-6" />
+        <span>onChain</span>
       </button>
     </>
   );

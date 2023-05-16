@@ -1,46 +1,15 @@
-import useSWR from "swr";
+import { useContext } from "react";
 import Card from "./Card";
+import { AppContext } from "./context/AppContext";
 import Loader from "./Loader";
-import { useEffect, useState } from "react";
 
-const fetcher = (url) => fetch(url).then((res) => res.json());
-
-const PolygonCard = () => {
-  const [visible, setVisible] = useState(6);
-  const [showMore, setShowMore] = useState(true);
-
-  const { data, error } = useSWR(
-    "http://dev-api.wall.app/api/v1/core/campaigns/",
-    fetcher,
-    {
-      revalidateOnMount: true,
-    }
-  );
-
-  useEffect(() => {
-    if (data && data.results.length <= visible) {
-      setShowMore(false);
-    } else {
-      setShowMore(true);
-    }
-  }, [data, visible]);
+const PolygonCard = ({}) => {
+  const { data, handleShowMore, handleShowLess, visible, error, showMore } =
+    useContext(AppContext);
 
   if (!data) {
     return <Loader />;
   }
-
-  if (data) {
-    console.log(data.results);
-  }
-
-  const handleShowMore = () => {
-    setVisible((prev) => prev + 3);
-  };
-
-  const handleShowLess = () => {
-    setVisible(6);
-    setShowMore(true);
-  };
 
   return (
     <>
