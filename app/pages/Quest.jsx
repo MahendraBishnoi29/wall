@@ -97,18 +97,19 @@ const Quest = () => {
               onChange={(e) => setSearch(e.target.value)}
               className="w-full bg-[#1A1D1F] font-semibold text-[#6F767E] rounded-lg py-2 px-3 focus:outline-none focus:shadow-outline"
               type="text"
-              placeholder="Search for Quests"
+              placeholder="Search Quest or Project"
             />
           </div>
         </div>
         {/* input search end*/}
 
         {/* TABS */}
-        <div className="">
+        <div>
           <Tabs />
         </div>
-        {/* TABS END*/}
+        {/* TABS END */}
 
+        {/* CARD AREA */}
         <div className="flex flex-wrap item-center gap-8 mt-6 px-4">
           <PolygonCard />
         </div>

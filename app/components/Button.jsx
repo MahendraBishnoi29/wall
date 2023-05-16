@@ -1,6 +1,5 @@
 import Link from "next/link";
-import React, { useContext } from "react";
-import { BsShieldCheck } from "react-icons/bs";
+import { useContext } from "react";
 import { AppContext } from "../context/AppContext";
 
 const Button = ({ title, property, Icon }) => {

@@ -11,42 +11,12 @@ const TabButton = ({ active }) => {
 
   return (
     <>
-      <Button title="All" property="all" />
+      <Button title="All" property="all" className="" />
+      <Button title="On Chain" property={tabs["on_chain"]} Icon={FiLink2} />
 
-      <Button title="Social" property="social" Icon={FiLink2} />
-      {/* <button
-        onClick={() =>
-          setTabs((tabs) => ({ ...tabs, social: !tabs["social"] }))
-        }
-        className={`flex items-center justify-center gap-2 font-medium text-xl p-[8px 16px] outline-none text-white hover:bg-[#065F46] px-4 py-2 rounded-lg transition-all duration-300 border border-[#059669] ${
-          tabs.social ? "bg-[#065F46]" : "bg-transparent"
-        }`}
-      >
-        <FiLink2 className="w-6 h-6" />
-        <span>Social</span>
-      </button> */}
+      <Button title="Social" property="social" Icon={FaTwitter} />
 
-      <button
-        onClick={() => setTabs((tabs) => ({ ...tabs, token: !tabs["token"] }))}
-        className={`flex items-center justify-center gap-2 font-medium text-xl p-[8px 16px] outline-none text-white hover:bg-[#065F46] px-4 py-2 rounded-lg transition-all duration-300 border border-[#059669] ${
-          tabs.token ? "bg-[#065F46]" : "bg-transparent"
-        }`}
-      >
-        <FaTwitter className="w-6 h-6" />
-        <span>Token</span>
-      </button>
-
-      <button
-        onClick={() =>
-          setTabs((tabs) => ({ ...tabs, on_chain: !tabs["on_chain"] }))
-        }
-        className={`flex items-center justify-center gap-2 font-medium text-xl p-[8px 16px] outline-none text-white hover:bg-[#065F46] px-4 py-2 rounded-lg transition-all duration-300 border border-[#059669] ${
-          tabs["on_chain"] ? "bg-[#065F46]" : "bg-transparent"
-        }`}
-      >
-        <BiDollar className="w-6 h-6" />
-        <span>onChain</span>
-      </button>
+      <Button title="Token" property="token" Icon={BiDollar} />
     </>
   );
 };

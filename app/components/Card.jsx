@@ -37,7 +37,7 @@ const Card = (item) => {
           )}
 
           {d?.ending_in !== "Ended" ? (
-            <span className="mr-2 font-medium text-xs text-gray-500">
+            <span className="mr-2 font-medium text-xs text-[#10B981]">
               {d?.ending_in} left
             </span>
           ) : (

@@ -1,8 +1,7 @@
-import Link from "next/link";
 import { useContext, useState } from "react";
-import { FaChevronDown, FaChevronUp, FaDiceD6 } from "react-icons/fa";
-import { BsShieldCheck } from "react-icons/bs";
 import { AiOutlineGift } from "react-icons/ai";
+import { BsShieldCheck } from "react-icons/bs";
+import { FaChevronDown, FaChevronUp, FaDiceD6 } from "react-icons/fa";
 import { AppContext } from "../context/AppContext";
 import Button from "./Button";
 
@@ -26,9 +25,6 @@ const Dropdown = () => {
         onClick={toggleDropdown}
         type="button"
         className="inline-flex justify-center items-center space-x-2 font-medium text-white rounded-md focus:outline-none"
-        id="options-menu"
-        aria-haspopup="true"
-        aria-expanded="true"
       >
         <span>More</span>
         {isOpen ? (
