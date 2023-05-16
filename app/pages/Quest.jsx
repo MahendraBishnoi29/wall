@@ -5,7 +5,8 @@ import useSWR from "swr";
 
 import PolygonCard from "../components/PolygonCard";
 import Tabs from "../components/Tabs";
-import { AppContext } from "../components/context/AppContext";
+import { AppContext } from "../context/AppContext";
+import { useDebounce } from "../hooks/useDebounce";
 
 const fetcher = (url) => fetch(url).then((res) => res.json());
 
@@ -24,6 +25,7 @@ const Quest = () => {
     airdrop: false,
   });
 
+  const debouncedSearchResult = useDebounce(search);
   let queryString = "";
 
   for (let item in tabs) {
@@ -33,8 +35,8 @@ const Quest = () => {
   }
 
   const { data, error } = useSWR(
-    `http://dev-api.wall.app/api/v1/core/campaigns/?search=${search}${
-      !(search === "") ? "" : `&campaign_tag=${queryString}`
+    `http://dev-api.wall.app/api/v1/core/campaigns/?search=${debouncedSearchResult}${
+      !(debouncedSearchResult === "") ? "" : `&campaign_tag=${queryString}`
     }`,
     fetcher,
     {
@@ -49,10 +51,6 @@ const Quest = () => {
       setShowMore(true);
     }
   }, [data, visible]);
-
-  if (data) {
-    console.log(data.results);
-  }
 
   const handleShowMore = () => {
     setVisible((prev) => prev + 3);
@@ -79,7 +77,9 @@ const Quest = () => {
       <div className="pt-6">
         {/* input search */}
         <div className="flex items-center justify-between px-4">
-          <h2 className="text-2xl font-semibold text-gray-200">Quests(23)</h2>
+          <h2 className="text-2xl font-semibold text-gray-200">
+            Quests({data?.results.length})
+          </h2>
           <div className="bg-[#1A1D1F] rounded-lg flex items-center">
             <span className="text-white pl-3">
               <svg
@@ -94,6 +94,7 @@ const Quest = () => {
               </svg>
             </span>
             <input
+              onChange={(e) => setSearch(e.target.value)}
               className="w-full bg-[#1A1D1F] font-semibold text-[#6F767E] rounded-lg py-2 px-3 focus:outline-none focus:shadow-outline"
               type="text"
               placeholder="Search for Quests"
