@@ -9,21 +9,21 @@ import { AppContext } from "../context/AppContext";
 import { useDebounce } from "../hooks/useDebounce";
 
 const fetcher = (url) => fetch(url).then((res) => res.json());
+const defaultFilters = {
+  all: true,
+  whitelist: false,
+  NFT: false,
+  proof: false,
+  social: false,
+  token: false,
+  on_chain: false,
+};
 
 const Quest = () => {
   const [visible, setVisible] = useState(6);
   const [showMore, setShowMore] = useState(true);
   const [search, setSearch] = useState("");
-  const [tabs, setTabs] = useState({
-    all: true,
-    social: false,
-    token: false,
-    proof: false,
-    whitelist: false,
-    NFT: false,
-    on_chain: false,
-    airdrop: false,
-  });
+  const [tabs, setTabs] = useState(defaultFilters);
 
   const debouncedSearchResult = useDebounce(search);
   let queryString = "";
@@ -61,6 +61,36 @@ const Quest = () => {
     setShowMore(true);
   };
 
+  const handleFilterChange = (filterName) => {
+    setTabs((prevState) => {
+      const currentFilters = {
+        ...prevState,
+        [filterName]: !prevState[filterName],
+      };
+      // Case 1: If waitlist, nft, and sold are true, deselect them and select all
+      if (
+        Object.keys(currentFilters)
+          .filter((key) => key !== "all")
+          .every((key) => currentFilters[key])
+      ) {
+        return defaultFilters;
+      }
+
+      // Case 2: If all is selected, deselect everything else
+      else if (filterName === "all") {
+        return defaultFilters;
+      }
+      // Case 3: If any one is selected, deselect all
+      else {
+        return {
+          ...prevState,
+          [filterName]: !prevState[filterName],
+          all: false,
+        };
+      }
+    });
+  };
+
   return (
     <AppContext.Provider
       value={{
@@ -72,6 +102,7 @@ const Quest = () => {
         showMore,
         handleShowLess,
         handleShowMore,
+        handleFilterChange,
       }}
     >
       <div className="pt-6">

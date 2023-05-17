@@ -12,7 +12,7 @@ const TabButton = ({ active }) => {
   return (
     <>
       <Button title="All" property="all" className="" />
-      <Button title="On Chain" property={tabs["on_chain"]} Icon={FiLink2} />
+      <Button title="On Chain" property="on_chain" Icon={FiLink2} />
 
       <Button title="Social" property="social" Icon={FaTwitter} />
 

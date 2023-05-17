@@ -15,7 +15,7 @@ const Dropdown = () => {
 
   return (
     <div
-      className={`relative inline-block text-left font-medium text-xl p-[8px 16px] outline-none text-white bg-black hover:bg-[#065F46] px-4 py-2 rounded-lg transition-all duration-300 border border-[#059669] ${
+      className={`relative inline-block text-left font-medium text-xl p-[8px 16px] outline-none text-white hover:bg-[#065F46] px-4 py-2 rounded-lg transition-all duration-300 border border-[#059669] ${
         tabs.proof || tabs.NFT || tabs.whitelist
           ? "bg-[#065F46]"
           : "bg-transparent"
