@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import useSWR from "swr";
 
-import PolygonCard from "../components/PolygonCard";
+import CardArea from "../components/CardArea";
 import Tabs from "../components/Tabs";
 import { AppContext } from "../context/AppContext";
 import { useDebounce } from "../hooks/useDebounce";
@@ -35,7 +35,7 @@ const Quest = () => {
   }
 
   const { data, error } = useSWR(
-    `http://dev-api.wall.app/api/v1/core/campaigns/?search=${debouncedSearchResult}${
+    `https://dev-api.wall.app/api/v1/core/campaigns/?search=${debouncedSearchResult}${
       !(debouncedSearchResult === "") ? "" : `&campaign_tag=${queryString}`
     }`,
     fetcher,
@@ -67,7 +67,7 @@ const Quest = () => {
         ...prevState,
         [filterName]: !prevState[filterName],
       };
-      // Case 1: If waitlist, nft, and sold are true, deselect them and select all
+      // Case 1: If all tag are true, deselect them and select all
       if (
         Object.keys(currentFilters)
           .filter((key) => key !== "all")
@@ -106,7 +106,6 @@ const Quest = () => {
       }}
     >
       <div className="pt-6">
-        {/* input search */}
         <div className="flex items-center justify-between px-4">
           <h2 className="text-2xl font-semibold text-gray-200">
             Quests({data?.results.length})
@@ -132,7 +131,6 @@ const Quest = () => {
             />
           </div>
         </div>
-        {/* input search end*/}
 
         {/* TABS */}
         <div>
@@ -142,7 +140,7 @@ const Quest = () => {
 
         {/* CARD AREA */}
         <div className="flex flex-wrap item-center gap-8 mt-6 px-4">
-          <PolygonCard />
+          <CardArea />
         </div>
       </div>
     </AppContext.Provider>
